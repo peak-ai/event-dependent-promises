@@ -1,0 +1,32 @@
+{
+  "name": "@peak-ai/event-dependent",
+  "version": "0.0.1",
+  "description": "Proxy async methods to await EventEmitter events",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peak-ai/event-dependent.git"
+  },
+  "keywords": [
+    "promise",
+    "async",
+    "await",
+    "eventemitter",
+    "dependency"
+  ],
+  "author": "James Wright <james.wright@peak.ai>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peak-ai/event-dependent/issues"
+  },
+  "homepage": "https://github.com/peak-ai/event-dependent#readme",
+  "devDependencies": {
+    "@types/node": "13.7.0",
+    "jest": "25.1.0",
+    "ts-jest": "25.1.0",
+    "typescript": "3.7.5"
+  }
+}

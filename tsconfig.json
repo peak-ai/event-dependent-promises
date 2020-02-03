@@ -1,0 +1,13 @@
+{
+  "include": ["src"],
+  "compilerOptions": {
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "lib": ["ES2020"],
+    "target": "ES6",
+    "module": "CommonJS",
+    "removeComments": true
+  }
+}
