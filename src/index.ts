@@ -6,7 +6,11 @@ interface Methods {
   [K: string]: Func;
 }
 
-const event = (eventSource: EventEmitter, successEvent: string, failureEvent: string) =>
+const event = (
+  eventSource: EventEmitter,
+  successEvent: string,
+  failureEvent: string,
+) =>
   new Promise((resolve, reject) => {
     /* We want to manually remove
      * any remaining events to which
@@ -19,7 +23,9 @@ const event = (eventSource: EventEmitter, successEvent: string, failureEvent: st
 
     const onFailure = () => {
       eventSource.off(successEvent, onSuccess);
-      reject(new Error(`Event Dependent: Failure event ${failureEvent} was fired`));
+      reject(
+        new Error(`Event Dependent: Failure event ${failureEvent} was fired`),
+      );
     };
 
     eventSource.once(successEvent, onSuccess);
@@ -44,7 +50,7 @@ const eventDependent = <TSource extends EventEmitter, TMethods extends Methods>(
         }
 
         return await target(...args);
-      }
+      },
     });
 
     return proxies;

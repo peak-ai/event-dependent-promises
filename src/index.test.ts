@@ -5,16 +5,11 @@ describe('eventDependent', () => {
   it('should await an EventEmitter event before resolving the requested Promise', async () => {
     const source = new EventEmitter();
 
-    const augmentedSource = eventDependent(
-      source,
-      'ready',
-      'error',
-      {
-        async getFoo(suffix: string) {
-          return `Foo${suffix}`;
-        },
+    const augmentedSource = eventDependent(source, 'ready', 'error', {
+      async getFoo(suffix: string) {
+        return `Foo${suffix}`;
       },
-    );
+    });
 
     process.nextTick(() => source.emit('ready'));
 
@@ -28,16 +23,11 @@ describe('eventDependent', () => {
   it('should reject if the fail event is emitted', async () => {
     const source = new EventEmitter();
 
-    const augmentedSource = eventDependent(
-      source,
-      'ready',
-      'error',
-      {
-        async getFoo(suffix: string) {
-          return `Foo${suffix}`;
-        },
+    const augmentedSource = eventDependent(source, 'ready', 'error', {
+      async getFoo(suffix: string) {
+        return `Foo${suffix}`;
       },
-    );
+    });
 
     process.nextTick(() => source.emit('error'));
 

@@ -1,9 +1,11 @@
 {
   "name": "@peak-ai/event-dependent",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Proxy async methods to await prerequisite EventEmitter events",
   "main": "dist/index.js",
   "scripts": {
+    "lint": "eslint 'src/**/*.ts'",
+    "format": "prettier --write jest.config.js 'src/**/*.ts'",
     "test": "jest"
   },
   "repository": {
@@ -26,7 +28,11 @@
   "devDependencies": {
     "@types/jest": "25.1.1",
     "@types/node": "13.7.0",
+    "@typescript-eslint/eslint-plugin": "2.19.0",
+    "@typescript-eslint/parser": "2.19.0",
+    "eslint": "6.8.0",
     "jest": "25.1.0",
+    "prettier": "1.19.1",
     "ts-jest": "25.1.0",
     "typescript": "3.7.5"
   }
