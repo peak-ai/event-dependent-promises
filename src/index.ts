@@ -22,8 +22,8 @@ const event = (eventSource: EventEmitter, successEvent: string, failureEvent: st
       reject(new Error(`Event Dependent: Failure event ${failureEvent} was fired`));
     };
 
-    eventSource.once(successEvent, resolve);
-    eventSource.once(failureEvent, reject);
+    eventSource.once(successEvent, onSuccess);
+    eventSource.once(failureEvent, onFailure);
   });
 
 const eventDependent = <TSource extends EventEmitter, TMethods extends Methods>(
