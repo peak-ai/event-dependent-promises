@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 
 type Methods = {
   [name: string]: Function;
-}
+};
 
 const event = (
   eventSource: EventEmitter,
