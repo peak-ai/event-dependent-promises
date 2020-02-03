@@ -13,14 +13,16 @@ describe('eventDependent', () => {
         async getFoo(suffix: string) {
           return `Foo${suffix}`;
         },
-
-        async getBar(suffix: string) {
-          return `Bar${suffix}`;
-        },
       },
     );
 
-    await augmentedSource.getBar(' bar!');
+    process.nextTick(() => source.emit('ready'));
+
+    const result = await augmentedSource.getFoo(' bar!');
+
+    expect(result).toBe('Foo bar!');
+    expect(source.listenerCount('ready')).toBe(0);
+    expect(source.listenerCount('error')).toBe(0);
   });
 
   it.todo('should throw an error if the event times out');

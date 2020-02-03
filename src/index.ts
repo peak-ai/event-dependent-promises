@@ -1,14 +1,17 @@
 import { EventEmitter } from 'events';
 
-type OneTimeEmitter = Pick<EventEmitter, 'once' | 'off'>;
 type Func = (...args: unknown[]) => Promise<unknown>;
 
 interface Methods {
   [K: string]: Func;
 }
 
-const event = (eventSource: OneTimeEmitter, successEvent: string, failureEvent: string) =>
+const event = (eventSource: EventEmitter, successEvent: string, failureEvent: string) =>
   new Promise((resolve, reject) => {
+    /* We want to manually remove
+     * any remaining events to which
+     * we've subscribed to allow our
+     * source to be garbage collected. */
     const onSuccess = () => {
       eventSource.off(failureEvent, onFailure);
       resolve();
@@ -23,7 +26,7 @@ const event = (eventSource: OneTimeEmitter, successEvent: string, failureEvent: 
     eventSource.once(failureEvent, reject);
   });
 
-const eventDependent = <TSource extends OneTimeEmitter, TMethods extends Methods>(
+const eventDependent = <TSource extends EventEmitter, TMethods extends Methods>(
   eventSource: TSource,
   successEvent: string,
   failureEvent: string,
