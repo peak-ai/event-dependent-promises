@@ -31,21 +31,21 @@ const eventDependent = <TSource extends OneTimeEmitter, TMethods extends Methods
 ): TMethods => {
   let hasEmitted = false;
 
-  return Object.fromEntries(
-    Object.entries(methods).map(([name, func]) => [
-      name,
-      new Proxy(func, {
-        async apply(target, context, ...args) {
-          if (!hasEmitted) {
-            await event(eventSource, successEvent, failureEvent);
-            hasEmitted = true;
-          }
-
-          return await target(...args);
+  // Node 10 doesn't support Object.fromEntries :(
+  return Object.entries(methods).reduce<Methods>((proxies, [name, func]) => {
+    proxies[name] = new Proxy(func, {
+      async apply(target, context, ...args) {
+        if (!hasEmitted) {
+          await event(eventSource, successEvent, failureEvent);
+          hasEmitted = true;
         }
-      })
-    ])
-  ) as TMethods;
+
+        return await target(...args);
+      }
+    });
+
+    return proxies;
+  }, {}) as TMethods;
 };
 
 export default eventDependent;
