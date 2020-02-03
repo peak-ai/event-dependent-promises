@@ -23,7 +23,5 @@ describe('eventDependent', () => {
     await augmentedSource.getBar(' bar!');
   });
 
-  it.todo('should throw an error if the event times out', () => {
-
-  });
+  it.todo('should throw an error if the event times out');
 });

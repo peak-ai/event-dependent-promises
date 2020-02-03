@@ -1,7 +1,7 @@
 {
   "name": "@peak-ai/event-dependent",
   "version": "0.0.1",
-  "description": "Proxy async methods to await EventEmitter events",
+  "description": "Proxy async methods to await prerequisite EventEmitter events",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest"
