@@ -1,53 +1,51 @@
 import { EventEmitter } from 'events';
 
-const DEFAULT_TIMEOUT_MS = 10000;
+type OneTimeEmitter = Pick<EventEmitter, 'once' | 'off'>;
+type Func = (...args: unknown[]) => Promise<unknown>;
 
-type FilteredKey<T, U> = { [P in keyof T]: T[P] extends U ? P : never }[keyof T];
-type Awaitable = ((...args: unknown[]) => Promise<unknown>);
+interface Methods {
+  [K: string]: Func;
+}
 
-const isAwaitableMethod = <TSource>(awaitableMethods: (FilteredKey<TSource, Awaitable>)[], prop: keyof TSource, value: unknown): value is Awaitable =>
-  awaitableMethods.includes(prop as FilteredKey<TSource, Awaitable>);
+const event = (eventSource: OneTimeEmitter, successEvent: string, failureEvent: string) =>
+  new Promise((resolve, reject) => {
+    const onSuccess = () => {
+      eventSource.off(failureEvent, onFailure);
+      resolve();
+    };
 
-const awaitEvent = (source: EventEmitter, eventName: string) =>
-  new Promise(resolve => {
-    source.once(eventName, resolve);
+    const onFailure = () => {
+      eventSource.off(successEvent, onSuccess);
+      reject(new Error(`Event Dependent: Failure event ${failureEvent} was fired`));
+    };
+
+    eventSource.once(successEvent, resolve);
+    eventSource.once(failureEvent, reject);
   });
 
-const timeout = (eventName: string, timeoutMs: number) =>
-  new Promise((resolve, reject) =>
-    setTimeout(() => reject(new Error(`${eventName} didn't fire after ${timeoutMs}`)), timeoutMs)
-  );
-
-const event = (source: EventEmitter, eventName: string, timeoutMs: number) =>
-  Promise.race([
-    awaitEvent(source, eventName),
-    timeout(eventName, timeoutMs),
-  ]);
-
-const eventDependent = <TSource extends EventEmitter>(
-  source: TSource,
-  eventName: string,
-  awaitableMethods: (FilteredKey<TSource, Awaitable>)[],
-  timeoutMs = DEFAULT_TIMEOUT_MS,
-): TSource => {
+const eventDependent = <TSource extends OneTimeEmitter, TMethods extends Methods>(
+  eventSource: TSource,
+  successEvent: string,
+  failureEvent: string,
+  methods: TMethods,
+): TMethods => {
   let hasEmitted = false;
 
-  return new Proxy(source, {
-    get(target: TSource, prop: keyof TSource) {
-      const method: unknown = target[prop];
+  return Object.fromEntries(
+    Object.entries(methods).map(([name, func]) => [
+      name,
+      new Proxy(func, {
+        async apply(target, context, ...args) {
+          if (!hasEmitted) {
+            await event(eventSource, successEvent, failureEvent);
+            hasEmitted = true;
+          }
 
-      if (!hasEmitted && isAwaitableMethod<TSource>(awaitableMethods, prop, method)) {
-        return async (...args: unknown[]) => {
-          await event(source, eventName, timeoutMs);
-          hasEmitted = true;
-
-          return await method(...args);
-        };
-      }
-
-      return target[prop];
-    },
-  });
+          return await target(...args);
+        }
+      })
+    ])
+  ) as TMethods;
 };
 
 export default eventDependent;
