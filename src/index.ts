@@ -1,9 +1,7 @@
 import { EventEmitter } from 'events';
 
-type AsyncFunc = (...args: unknown[]) => Promise<unknown>;
-
-interface Methods {
-  [K: string]: AsyncFunc;
+type Methods = {
+  [name: string]: Function;
 }
 
 const event = (
