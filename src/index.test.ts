@@ -3,8 +3,8 @@ import { EventEmitter } from 'events';
 
 describe('eventDependentPromises', () => {
   const methods = {
-    async getFoo(suffix: string) {
-      return `Foo${suffix}`;
+    async getBar(prefix: string, suffix: string) {
+      return `${prefix}bar${suffix}`;
     },
   };
 
@@ -19,9 +19,9 @@ describe('eventDependentPromises', () => {
   it('should await an EventEmitter event before resolving the requested Promise', async () => {
     process.nextTick(() => source.emit('ready'));
 
-    const result = await augmented.getFoo(' bar!');
+    const result = await augmented.getBar('Foo ', ' baz!');
 
-    expect(result).toBe('Foo bar!');
+    expect(result).toBe('Foo bar baz!');
     expect(source.listenerCount('ready')).toBe(0);
     expect(source.listenerCount('error')).toBe(0);
   });
@@ -29,7 +29,7 @@ describe('eventDependentPromises', () => {
   it('should reject if the fail event is emitted', async () => {
     process.nextTick(() => source.emit('error'));
 
-    await expect(augmented.getFoo(' bar!')).rejects.toEqual(
+    await expect(augmented.getBar('Foo ', ' baz!')).rejects.toEqual(
       new Error(`Event Dependent: Failure event error was fired`),
     );
 
@@ -40,8 +40,8 @@ describe('eventDependentPromises', () => {
   it('should not subscribe to the event source if a successful emission has already occured', async () => {
     process.nextTick(() => source.emit('ready'));
 
-    await augmented.getFoo(' bar!');
-    await augmented.getFoo(' bar!');
+    await augmented.getBar('Foo ', ' baz!');
+    await augmented.getBar('Foo ', ' baz!');
 
     expect(source.listenerCount('ready')).toBe(0);
     expect(source.listenerCount('error')).toBe(0);

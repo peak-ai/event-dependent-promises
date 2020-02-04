@@ -63,7 +63,7 @@ const eventDependentPromises = <
   // Node 10 doesn't support Object.fromEntries :(
   return Object.entries(methods).reduce<Methods>((proxies, [name, func]) => {
     proxies[name] = new Proxy(func, {
-      async apply(target, context, ...args) {
+      async apply(target, context, args) {
         if (!hasEmitted) {
           await event(eventSource, successEvent, failureEvent);
           hasEmitted = true;
