@@ -1,4 +1,4 @@
-# Event-Dependent Promises
+# Event-Dependent Promises
 
 Proxy async methods to additionally await a prequisitve event.
 
