@@ -22,7 +22,7 @@
     "dependency"
   ],
   "author": "James Wright <james.wright@peak.ai>",
-  "license": "ISC",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/peak-ai/event-dependent-promises/issues"
   },
