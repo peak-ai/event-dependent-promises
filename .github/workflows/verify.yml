@@ -8,7 +8,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: borales/actions-yarn@v2.0.0
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "8.x" # TODO: bump to 10 ASAP
     - name: Build and test
       run: |
         yarn
