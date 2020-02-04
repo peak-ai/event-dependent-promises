@@ -1,6 +1,6 @@
 # Contributing to Event-Dependent Promises
 
-Despite being primarily maintained by Peak, we welcome pull requests to this repo!
+Despite being primarily maintained by Peak, we welcome pull requests to this repo! We thank you for your time and efforts in making this library better 🙌🏻
 
 ## Consider raising an issue first if your proposed PR:
 
