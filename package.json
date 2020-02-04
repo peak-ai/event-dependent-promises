@@ -7,7 +7,7 @@
     "lint": "eslint 'src/**/*.ts'",
     "format": "prettier --write jest.config.js 'src/**/*.ts'",
     "build": "tsc -p .",
-    "prepublish": "yarn lint && yarn format && yarn build && yarn test",
+    "prepare": "yarn lint && yarn format && yarn build && yarn test",
     "test": "jest"
   },
   "repository": {
