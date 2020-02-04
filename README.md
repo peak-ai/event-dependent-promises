@@ -1,5 +1,7 @@
 # Event-Dependent Promises
 
+![Verify](https://github.com/peak-ai/event-dependent-promises/workflows/Verify/badge.svg)
+
 Proxy async methods to await prerequisite `EventEmitter` events
 
 ```ts
