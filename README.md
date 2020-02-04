@@ -125,6 +125,38 @@ const { default: eventDependentPromises } = require('@peak-ai/event-dependent-pr
 
 ## API
 
+### `eventDependentPromises()`
+
+```ts
+function eventDependentPromises<TSource extends EventEmitter, TMethods extends Methods>(
+  eventSource: TSource,
+  successEvent: string,
+  failureEvent: string,
+  methods: TMethods,
+): TMethods
+```
+
+#### Arguments
+
+* `eventSource`: any `EventEmitter`
+* `successEvent`: the name of the event that suggests successful initialisation
+* `failureEvent`: the name of the event that suggests unsuccessful initialisation. **If this is emitted**, then the `Promise`s returned by any of the `methods` **will reject**
+* `methods`: an object whose properties refer to async methods (i.e. returns a `Promise` or uses `async/await`) e.g:
+
+```ts
+const methods = {
+  fetchItems() {
+    return window.fetch('/items');
+  },
+};
+```
+
+#### Returns
+
+`TMethods`
+
+This is, on the surface, the same object you passed for the `methods` argument. However, each method is augmented to await the required event emission if it hasn't already occured.
+
 ## Local development
 
 Prerequisites:
