@@ -1,10 +1,10 @@
 # Event-Dependent Promises
 
-Proxy async methods to additionally await a prequisitve event.
+Proxy async methods to await prerequisite `EventEmitter` events
 
 ```ts
 import eventDependentPromises from '@peak-ai/event-dependent-promises';
-import sdk, { Data, Events } from 'some-third-party- eventemitter';
+import sdk, { Data, Events } from 'some-third-party-eventemitter';
 import { APIGatewayEvent } from 'aws-lambda';
 
 const dependentSdk = eventDependentPromises(
@@ -22,9 +22,10 @@ const dependentSdk = eventDependentPromises(
 export const handler = (event: APIGatewayEvent): Promise<Data> => {
   const { body: key } = event;
 
-  /* dependentSdk.getData(key) will
-   * wait for READY event to be emitted
-   * before invoking sdk.getData(key) */
+  /* dependentSdk.getData(key) will invoke
+   * sdk.getData(key) once the READY
+   * event has been emitted or immediately
+   * if it's been fired already. */
   return dependentSdk.getData(key)
 };
 ```
