@@ -1,6 +1,6 @@
 {
   "name": "@peak-ai/event-dependent-promises",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Proxy async methods to await prerequisite EventEmitter events",
   "main": "dist/index.js",
   "scripts": {
