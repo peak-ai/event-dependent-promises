@@ -33,14 +33,14 @@
   },
   "homepage": "https://github.com/peak-ai/event-dependent-promises#readme",
   "devDependencies": {
-    "@types/jest": "25.1.1",
+    "@types/jest": "24.9.0",
     "@types/node": "13.7.0",
     "@typescript-eslint/eslint-plugin": "2.19.0",
     "@typescript-eslint/parser": "2.19.0",
     "eslint": "6.8.0",
-    "jest": "25.1.0",
+    "jest": "24.9.0",
     "prettier": "1.19.1",
-    "ts-jest": "25.1.0",
+    "ts-jest": "24.9.0",
     "typescript": "3.7.5"
   }
 }
