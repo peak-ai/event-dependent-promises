@@ -30,7 +30,7 @@ const event = (
     eventSource.once(failureEvent, onFailure);
   });
 
-const eventDependent = <TSource extends EventEmitter, TMethods extends Methods>(
+const eventDependentPromises = <TSource extends EventEmitter, TMethods extends Methods>(
   eventSource: TSource,
   successEvent: string,
   failureEvent: string,
@@ -55,4 +55,4 @@ const eventDependent = <TSource extends EventEmitter, TMethods extends Methods>(
   }, {}) as TMethods;
 };
 
-export default eventDependent;
+export default eventDependentPromises;

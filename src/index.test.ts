@@ -1,7 +1,7 @@
-import eventDependent from './';
+import eventDependentPromises from './';
 import { EventEmitter } from 'events';
 
-describe('eventDependent', () => {
+describe('eventDependentPromises', () => {
   const methods = {
     async getFoo(suffix: string) {
       return `Foo${suffix}`;
@@ -13,7 +13,7 @@ describe('eventDependent', () => {
 
   beforeEach(() => {
     source = new EventEmitter();
-    augmented = eventDependent(source, 'ready', 'error', methods);
+    augmented = eventDependentPromises(source, 'ready', 'error', methods);
   });
 
   it('should await an EventEmitter event before resolving the requested Promise', async () => {
