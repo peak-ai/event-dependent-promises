@@ -18,7 +18,7 @@ TODO: explain _why_ you have made these changes
 
 Does your pull request include any breaking changes?
 
-[ ] Yes
-[ ] No
+- [ ] Yes
+- [ ] No
 
 If _yes_, please list these changes, and explain why they are necessary
