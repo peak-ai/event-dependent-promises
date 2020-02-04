@@ -64,7 +64,7 @@ export const handler = async (event: APIGatewayEvent, context: Context, cb: Call
 There are some key drawbacks, however, that present themselves:
 
 * Mixing multiple async paradigms (`Promise`s _and_ callbacks!)
-* Having to manually track whether the `EventEmitter` (`sdk`) has already fired its initialisation event (i.e. during a warm lambda invocation)
+* Having to manually track whether the `EventEmitter` (`sdk`) has already fired its initialisation event (required for warm lambda invocations)
 
 Event-Dependent Promises is directed a resolving (excuse the pun) these two issues by:
 
@@ -105,8 +105,47 @@ export const handler = async (event: APIGatewayEvent): Promise<Data> => {
 
 ## Getting started
 
+You can install Event-Dependent Promises from npm:
+
+```sh
+npm i -E @peak-ai/event-dependent-promises
+```
+
+The library comprises of a single function, exposed via a `default` binding:
+
+```ts
+import eventDependentPromises from '@peak-ai/event-dependent-promises';
+```
+
+If you're using CommonJS, this means you'll have to destructure and rename the `default` binding:
+
+```ts
+const { default: eventDependentPromises } = require('@peak-ai/event-dependent-promises');
+```
+
 ## API
 
 ## Local development
 
+Prerequisites:
+
+* [Node Version Manager](https://github.com/nvm-sh/nvm)
+* [Yarn v1](https://yarnpkg.com/getting-started/install)
+
+1. Fork this repo
+2. `git clone <your fork>`
+3. cd `event-dependent-promises`
+4. `nvm i`
+5. `yarn`
+
+You can then run:
+
+* `yarn lint`: runs ESLint against the source code
+* `yarn format:check`: verifies that the source code adheres to our Prettier configuration
+* `yarn format:write`: fixes and overwrites any source files that _don't_ adhere to our Prettier config
+* `yarn build`: runs the TypeScript compiler against the project and produces distributable output
+* `yarn test`: runs the unit tests
+
 ## Contributing
+
+Despite being primarily maintained by Peak, we welcome and appreciate any contributions from the community! Please see the [contribution guidelines](https://github.com/peak-ai/event-dependent-promises/blob/master/CONTRIBUTING.md) for more info.
