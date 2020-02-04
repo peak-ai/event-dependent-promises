@@ -1,8 +1,9 @@
 {
   "name": "@peak-ai/event-dependent-promises",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Proxy async methods to await prerequisite EventEmitter events",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "lint": "eslint 'src/**/*.ts'",
     "format": "prettier --write jest.config.js 'src/**/*.ts'",
