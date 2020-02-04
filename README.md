@@ -31,3 +31,13 @@ export const handler = (event: APIGatewayEvent): Promise<Data> => {
   return dependentSdk.getData(key)
 };
 ```
+
+## Why?
+
+## Installation
+
+## API
+
+## Local development
+
+## Contributing
