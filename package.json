@@ -9,7 +9,7 @@
     "format:check": "prettier --check jest.config.js 'src/**/*.ts'",
     "format:write": "prettier --write jest.config.js 'src/**/*.ts'",
     "build": "tsc -p .",
-    "prepare": "yarn lint && yarn format:check && yarn build && yarn test",
+    "prepublishOnly": "yarn lint && yarn format:check && yarn build && yarn test",
     "test": "jest"
   },
   "repository": {
@@ -40,7 +40,7 @@
     "eslint": "6.8.0",
     "jest": "24.9.0",
     "prettier": "1.19.1",
-    "ts-jest": "24.9.0",
+    "ts-jest": "24.1.0",
     "typescript": "3.7.5"
   }
 }
