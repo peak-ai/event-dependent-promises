@@ -1,6 +1,6 @@
 {
   "name": "@peak-ai/event-dependent-promises",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Proxy async methods to await prerequisite EventEmitter events",
   "main": "dist/index.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "url": "https://github.com/peak-ai/event-dependent-promises/issues"
   },
   "engines": {
-    "node": "10"
+    "node": ">=8"
   },
   "homepage": "https://github.com/peak-ai/event-dependent-promises#readme",
   "devDependencies": {
