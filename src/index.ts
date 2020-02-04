@@ -16,12 +16,12 @@ const subscribe = (
    * we've subscribed to allow our
    * source to be garbage collected. */
   const onSuccess = () => {
-    eventSource.off(failureEvent, onFailure);
+    eventSource.removeListener(failureEvent, onFailure);
     resolve();
   };
 
   const onFailure = () => {
-    eventSource.off(successEvent, onSuccess);
+    eventSource.removeListener(successEvent, onSuccess);
 
     if (reject) {
       reject(
