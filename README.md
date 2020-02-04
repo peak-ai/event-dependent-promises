@@ -22,9 +22,9 @@ const dependentSdk = eventDependentPromises(
 export const handler = (event: APIGatewayEvent): Promise<Data> => {
   const { body: key } = event;
 
-  /* getData will wait for Ready
-   * event to be emitted before
-   * invoking sdk.getData(key) */
+  /* dependentSdk.getData(key) will
+   * wait for READY event to be emitted
+   * before invoking sdk.getData(key) */
   return dependentSdk.getData(key)
 };
 ```
