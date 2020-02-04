@@ -151,7 +151,7 @@ const methods = {
 };
 ```
 
-#### Returns
+#### Returns
 
 `TMethods`
 
