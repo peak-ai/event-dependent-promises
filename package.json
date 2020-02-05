@@ -1,6 +1,6 @@
 {
   "name": "@peak-ai/event-dependent-promises",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Proxy async methods to await prerequisite EventEmitter events",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,6 +15,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/peak-ai/event-dependent-promises.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "promise",
