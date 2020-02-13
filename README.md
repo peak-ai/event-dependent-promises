@@ -66,7 +66,7 @@ There are some key drawbacks, however, that present themselves:
 * Mixing multiple async paradigms (`Promise`s _and_ callbacks!)
 * Having to manually track whether the `EventEmitter` (`sdk`) has already fired its initialisation event (required for warm lambda invocations)
 
-Event-Dependent Promises is directed a resolving (excuse the pun) these two issues by:
+Event-Dependent Promises is directed at resolving (excuse the pun) these two issues by:
 
 * internally tracking when the prerequisite event has been emitted
 * proxying a set of methods to return `Promise`s, which won't resolve until the prerequisite event has been fired once
@@ -102,6 +102,12 @@ export const handler = async (event: APIGatewayEvent): Promise<Data> => {
   return dependentSdk.getData(key);
 };
 ```
+
+### Why this library instead of `events.once()`?
+
+* Internally tracks whether the required event has already been fired, in which case execution will continue; contrast this with `events.once()`, which will never resolve if the event has already occurred
+* Supports a custom rejection event (over simply rejecting on `'error'` being emitted)
+* Works with Node.js 10
 
 ## Getting started
 
