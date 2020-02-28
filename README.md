@@ -172,7 +172,7 @@ Prerequisites:
 
 1. Fork this repo
 2. `git clone <your fork>`
-3. cd `event-dependent-promises`
+3. `cd event-dependent-promises`
 4. `nvm i`
 5. `yarn`
 
