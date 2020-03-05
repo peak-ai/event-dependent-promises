@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "lint": "eslint 'src/**/*.ts'",
+    "lint": "eslint jest.config*js 'src/**/*.ts'",
     "format": "prettier --write jest.config*js 'src/**/*.ts'",
     "build": "tsc -p .",
     "preupdate": "yarn lint && yarn format && yarn build && yarn test:dist",
