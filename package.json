@@ -6,11 +6,12 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "lint": "eslint 'src/**/*.ts'",
-    "format:check": "prettier --check jest.config.js 'src/**/*.ts'",
-    "format:write": "prettier --write jest.config.js 'src/**/*.ts'",
+    "format": "prettier --write jest.config*js 'src/**/*.ts'",
     "build": "tsc -p .",
-    "prepublishOnly": "yarn lint && yarn format:check && yarn build && yarn test",
-    "test": "jest"
+    "preupdate": "yarn lint && yarn format && yarn build && yarn test:dist",
+    "prepublishOnly": "yarn preupdate",
+    "test": "jest",
+    "test:dist": "jest --config jest.config.dist.js"
   },
   "repository": {
     "type": "git",

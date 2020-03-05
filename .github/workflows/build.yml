@@ -1,0 +1,27 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "10.x"
+    - name: Install dependencies
+      run: |
+        yarn
+    - name: Lint
+      run: |
+        yarn lint
+    - name: Fix formatting
+      run: |
+        yarn format
+    - name: Compile TypeScript source
+      run: |
+        yarn build
+    - name: Run tests
+      run: |
+        yarn test:dist
