@@ -16,9 +16,9 @@ jobs:
     - name: Lint
       run: |
         yarn lint
-    - name: Fix formatting
+    - name: Check formatting
       run: |
-        yarn format
+        yarn format:check
     - name: Compile TypeScript source
       run: |
         yarn build
