@@ -52,6 +52,7 @@ const eventDependentPromises = <
   failureEvent: string,
   methods: TMethods,
 ): TMethods => {
+  throw new Error('fail');
   let hasEmitted = false;
 
   /* Handles initial emission that
